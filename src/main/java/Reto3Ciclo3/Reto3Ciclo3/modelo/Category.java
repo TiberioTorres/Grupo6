@@ -1,6 +1,7 @@
 
 package Reto3Ciclo3.Reto3Ciclo3.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -23,8 +24,8 @@ public class Category implements Serializable{
     private String name;
     private String description;
     
-    
-    @OneToMany(cascade ={CascadeType.PERSIST},mappedBy ="categoria")
+    @OneToMany(cascade ={CascadeType.PERSIST},mappedBy ="category")
+    @JsonIgnoreProperties({"category","message"})
     public List<Machine> machines;
 
     public Integer getId() {

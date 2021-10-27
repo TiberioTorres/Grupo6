@@ -1,11 +1,14 @@
 
 package Reto3Ciclo3.Reto3Ciclo3.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,11 +20,31 @@ public class Message implements Serializable {
     private Integer idMessage;
     private String messageText;
 
-    
-    
-    
-    
-    
+    @ManyToOne
+    @JoinColumn(name="id")
+    @JsonIgnoreProperties({"messages", "reservations"})
+    private Machine machine;
+
+    @ManyToOne
+    @JoinColumn(name="clientId")
+    @JsonIgnoreProperties({"messages", "reservations","client"})
+    private Client client;
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
     
     public Integer getIdMessage() {
         return idMessage;

@@ -1,14 +1,18 @@
 
 package Reto3Ciclo3.Reto3Ciclo3.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -22,15 +26,28 @@ public class Machine implements Serializable{
     private Integer year;
     private String description;
 
-
-    
     @ManyToOne
     @JoinColumn(name="categoriaId")
+    @JsonIgnoreProperties("machines")
+    private Category category;
+
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="machine")
+    @JsonIgnoreProperties({"machine","messages","client"})
+    public List<Message>messages;
+        
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "machine")
+    @JsonIgnoreProperties({"machine","client"})
+    public List<Reservation> reservations;
     
-    private Category categoria;
 
     
-    
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
     
     public Integer getId() {
         return id;
@@ -64,12 +81,12 @@ public class Machine implements Serializable{
         this.name = name;
     }
 
-    public Category getCategoria() {
-        return categoria;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoria(Category categoria) {
-        this.categoria = categoria;
+    public void setCategory(Category category) {
+        this.category = category;
     }
     
     public String getDescription() {
@@ -78,6 +95,14 @@ public class Machine implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
     
     }

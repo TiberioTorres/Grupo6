@@ -33,7 +33,7 @@ public class ControllerMachine {
     }
     
     @GetMapping("/{id}")
-    public Optional<Machine> getMachineIndividual(@PathVariable("id")int id){
+    public Optional<Machine> getMachineIndividual(@PathVariable("idReservation")int id){
         return serviciosMachine.getMachineId(id);
     }
     
