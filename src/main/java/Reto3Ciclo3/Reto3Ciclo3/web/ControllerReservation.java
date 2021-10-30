@@ -56,7 +56,7 @@ public class ControllerReservation {
      }
      
      @GetMapping("/report-clients")
-     public List<ContadorClientes> getClientes(){
+     public List<ContadorClientes> getClient(){
          return serviciosReservation.reporteClientesServicio();
      }
 
