@@ -23,4 +23,8 @@ public class RepositorioMachine {
     public Machine save(Machine machine){
         return crud.save(machine);
     }
+    
+    public void delete(Machine machine){
+        crud.delete(machine);
+    }
 }

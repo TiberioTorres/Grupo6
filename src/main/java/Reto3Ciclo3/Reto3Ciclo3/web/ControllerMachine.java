@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import Reto3Ciclo3.Reto3Ciclo3.servicio.ServiciosMachine;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/Machine")
@@ -41,5 +43,16 @@ public class ControllerMachine {
     @ResponseStatus(HttpStatus.CREATED)
     public Machine save (@RequestBody Machine machine){
         return serviciosMachine.save(machine);
+    }
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Machine update (@RequestBody Machine categoria){
+    return serviciosMachine.update(categoria);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteCategoryIndividual (@PathVariable("id") int id){
+    return serviciosMachine.deleteMachine(id);
     }
 }

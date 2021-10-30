@@ -33,4 +33,34 @@ public class ServiciosMachine {
             }
         }
     }
+        public Machine update(Machine machine){
+        if(machine.getId()!=null){
+            Optional<Machine>g=metodosCrud.getMachineId(machine.getId());
+            if(!g.isEmpty()){
+                if(machine.getName()!=null){
+                    g.get().setName(machine.getName());
+                }
+                if(machine.getBrand()!=null){
+                    g.get().setBrand(machine.getBrand());
+                }   
+                if(machine.getYear()!=null){
+                    g.get().setYear(machine.getYear());
+                }
+                if(machine.getDescription()!=null){
+                    g.get().setDescription(machine.getDescription());
+                }
+                return metodosCrud.save(g.get());
+            }
+        }
+        return machine;
+    }
+    
+    public boolean deleteMachine(int id){
+        Optional<Machine> c=getMachineId(id);
+        if(!c.isEmpty()){
+            metodosCrud.delete(c.get());
+            return true;
+        }
+        return false;
+    }
 }

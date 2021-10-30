@@ -1,6 +1,8 @@
 
 package Reto3Ciclo3.Reto3Ciclo3.web;
+import Reto3Ciclo3.Reto3Ciclo3.modelo.ContadorClientes;
 import Reto3Ciclo3.Reto3Ciclo3.modelo.Reservation;
+import Reto3Ciclo3.Reto3Ciclo3.modelo.StatusReservas;
 import Reto3Ciclo3.Reto3Ciclo3.servicio.ServiciosReservation;
 import java.util.List;
 import java.util.Optional;
@@ -42,4 +44,20 @@ public class ControllerReservation {
     public Reservation save(@RequestBody Reservation reservation){
         return serviciosReservation.save(reservation);
     }   
+    
+    @GetMapping("/report-status")
+    public StatusReservas getReservas(){
+        return serviciosReservation.reporteStatusServicio();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+     public List<Reservation> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+         return serviciosReservation.reporteTiempoServicio(dateOne, dateTwo);
+     }
+     
+     @GetMapping("/report-clients")
+     public List<ContadorClientes> getClientes(){
+         return serviciosReservation.reporteClientesServicio();
+     }
+
 }
